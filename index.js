@@ -19,7 +19,7 @@ server.use('/', routes);
 
 conn.sync().then(async () => {
   console.log('Database connected');
-  server.listen(port, () => {
+  server.listen(port, '0.0.0.0' , () => {
     console.log('Server raised on port ' + port);
   });
 });
