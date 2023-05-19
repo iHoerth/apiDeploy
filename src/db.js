@@ -1,30 +1,16 @@
 require('dotenv').config();
-const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
+const { PGUSER, PGPASSWORD, PGHOST, PGDATABASE, PGPORT } = process.env;
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const pg = require('pg');
 
-const sequelize = new Sequelize(DB_AWS, {
-  dialectModule: pg,
-  logging: false,
-  native: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
-});
-
 // REQUIRE MODELS "const characterModel = require('./models/Character')"
 
-//!
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
-//   logging: false,
-//   native: false,
-// });
-//!
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
+  logging: false,
+  native: false,
+});
 
 const basename = path.basename(__filename);
 
