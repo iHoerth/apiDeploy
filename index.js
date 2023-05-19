@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { tokenMP, MP_SUCCES, MP_PENDING ,MP_FAILURE } = process.env;
+const { PORT, tokenMP, MP_SUCCES, MP_PENDING ,MP_FAILURE } = process.env;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -7,7 +7,7 @@ const cors = require('cors');
 const routes = require('./src/routes/index.js');
 const { conn } = require('./src/db.js');
 
-const PORT = PORT || 3001;
+const port = PORT || 3001;
 
 const server = express();
 server.use(express.json());
@@ -19,12 +19,12 @@ server.use('/', routes);
 
 conn.sync().then(async () => {
   console.log('Database connected');
-  server.listen(PORT, () => {
-    console.log('Server raised on port ' + PORT);
+  server.listen(port, () => {
+    console.log('Server raised on port ' + port);
   });
 });
 
-server.set('port', PORT);
+server.set('port', port);
 server.use(
   cors({
     origin: '*',

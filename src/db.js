@@ -7,7 +7,7 @@ const pg = require('pg');
 
 // REQUIRE MODELS "const characterModel = require('./models/Character')"
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
+const sequelize = new Sequelize(`postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}`, {
   logging: false,
   native: false,
 });
