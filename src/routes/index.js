@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const Doctors = require('./')
 const doctors = require("./doctors");
 const patients = require("./patients");
 const socialSecurity = require("./socialSecurity");
@@ -17,14 +18,15 @@ const { createFakeData } = require("../fakeData/fakeData");
 
 const router = Router();
 
-// router.post("/fake", async (req, res) => {
-//   try {
-//     await createFakeData();
-//     return res.status(200).send("data created");
-//   } catch (error) {
-//     return res.status(404).send(error.message);
-//   }
-// });
+router.post("/fake", async (req, res) => {
+  try {
+    
+    await createFakeData();
+    return res.status(200).send("data created");
+  } catch (error) {
+    return res.status(404).send(error.message);
+  }
+});
 
 router.use("/doctors", doctors);
 router.use("/patients", patients);
