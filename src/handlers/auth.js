@@ -3,7 +3,7 @@ const GOOGLE_CLIENT_ID = '508619813355-m14kuspv71hdsu4s1u8bsl421a999cf8.apps.goo
 const SECRET_KEY = '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'
 const { DoctorType, PacienteType } = require("../db");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 
