@@ -1,6 +1,6 @@
 require("dotenv").config();
-const { GOOGLE_CLIENT_ID, SECRET_KEY } = process.env;
-
+const GOOGLE_CLIENT_ID = '508619813355-m14kuspv71hdsu4s1u8bsl421a999cf8.apps.googleusercontent.com'
+const SECRET_KEY = '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'
 const { DoctorType, PacienteType } = require("../db");
 
 const bcrypt = require("bcrypt");
