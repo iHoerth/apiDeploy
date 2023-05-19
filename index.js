@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { PORT, tokenMP, MP_SUCCES, MP_PENDING ,MP_FAILURE } = process.env;
+const { PORT, tokenMP, MP_SUCCES, MP_PENDING, MP_FAILURE } = process.env;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -11,12 +11,20 @@ const port = PORT || 3001;
 
 const server = express();
 server.use(express.json());
-server.use(cors());
+
+server.use(
+  cors({
+    origin: 'https://apideploy-production.up.railway.app',
+  })
+);
+
 server.use(
   cors({
     origin: '*',
   })
 );
+server.use(cors());
+
 server.use(morgan('dev'));
 //
 
@@ -24,13 +32,12 @@ server.use('/', routes);
 
 conn.sync().then(async () => {
   console.log('Database connected');
-  server.listen(port, '0.0.0.0' , () => {
+  server.listen(port, '0.0.0.0', () => {
     console.log('Server raised on port ' + port);
   });
 });
 
 // server.set('port', port);
-
 
 // server.post('/turno', (req, res) => {
 //   // res.status(200).send('ok');
