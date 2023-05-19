@@ -1,18 +1,18 @@
-const {DoctorType}= require("../../db")
-const {getDoctorCalendar}=require("../appointments/getDoctorCalendar")
+const { DoctorType } = require('../../db');
+const { getDoctorCalendar } = require('../appointments/getDoctorCalendar');
 
 const getDoctorById = async (id) => {
-    const calendar = await getDoctorCalendar(id);
-    const doctorinfo = await DoctorType.findOne({
-        where: { id },
-        include: {all: true}
-    });
-    if (!doctorinfo) {
-        throw new Error('No se encontró el doctor con ese id');
-    }
-    doctorinfo.dataValues.calendar=calendar;
-    console.log(doctorinfo, calendar)
-    return doctorinfo;
-}
+  const calendar = await getDoctorCalendar(id);
+  const doctorinfo = await DoctorType.findOne({
+    where: { id },
+    include: { all: true },
+  });
+  if (!doctorinfo) {
+    throw new Error('No se encontró el doctor con ese id');
+  }
+  doctorinfo.dataValues.calendar = calendar;
+  console.log('******* ***** *****\n', calendar);
+  return doctorinfo;
+};
 
 module.exports = { getDoctorById };
