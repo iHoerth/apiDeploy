@@ -10,7 +10,6 @@ const { conn } = require('./src/db.js');
 const port = PORT || 3001;
 
 const server = express();
-server.use(express.json());
 
 server.use(
   cors({
@@ -18,14 +17,17 @@ server.use(
   })
 );
 
-server.use(
-  cors({
-    origin: '*',
-  })
-);
-server.use(cors());
+server.use(express.json());
 
-server.use(morgan('dev'));
+
+// server.use(
+//   cors({
+//     origin: '*',
+//   })
+// );
+// server.use(cors());
+
+// server.use(morgan('dev'));
 //
 
 server.use('/', routes);
