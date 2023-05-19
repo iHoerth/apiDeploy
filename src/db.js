@@ -1,37 +1,47 @@
-require("dotenv").config();
+require('dotenv').config();
 const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
-const { Sequelize } = require("sequelize");
-const fs = require("fs");
-const path = require("path");
+const { Sequelize } = require('sequelize');
+const fs = require('fs');
+const path = require('path');
+const pg = require('pg');
+
+const sequelize = new Sequelize(DB_AWS, {
+  dialectModule: pg,
+  logging: false,
+  native: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
 // REQUIRE MODELS "const characterModel = require('./models/Character')"
 
-const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`,
-  { logging: false, native: false }
-);
+//!
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
+//   logging: false,
+//   native: false,
+// });
+//!
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, "/models"))
-  .filter(
-    (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-  )
+fs.readdirSync(path.join(__dirname, '/models'))
+  .filter((file) => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+    modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [
-  entry[0][0].toUpperCase() + entry[0].slice(1),
-  entry[1],
-]);
+let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
 // models "characterModel(sequelize);"
@@ -48,7 +58,7 @@ const {
   PacienteType,
   Pago,
   Horario,
-  Documento
+  Documento,
 } = sequelize.models;
 
 // 1:1
@@ -66,11 +76,11 @@ const {
 DoctorType.hasMany(Cita);
 Cita.belongsTo(DoctorType);
 
-DoctorType.belongsToMany(ObraSocial, { through: "doctor_obraSocials" });
-ObraSocial.belongsToMany(DoctorType, { through: "doctor_obraSocials" });
+DoctorType.belongsToMany(ObraSocial, { through: 'doctor_obraSocials' });
+ObraSocial.belongsToMany(DoctorType, { through: 'doctor_obraSocials' });
 
-DoctorType.belongsToMany(Especialidad, { through: "doctor_especialidades" });
-Especialidad.belongsToMany(DoctorType, { through: "doctor_especialidades" });
+DoctorType.belongsToMany(Especialidad, { through: 'doctor_especialidades' });
+Especialidad.belongsToMany(DoctorType, { through: 'doctor_especialidades' });
 
 DoctorType.hasMany(Opinion);
 Opinion.belongsTo(DoctorType);
@@ -96,13 +106,13 @@ HistorialMedico.hasOne(PacienteType);
 Horario.belongsTo(DoctorType);
 DoctorType.hasOne(Horario);
 
-DoctorType.hasMany(Documento); 
+DoctorType.hasMany(Documento);
 Documento.belongsTo(DoctorType);
 
-PacienteType.hasMany(Documento); 
+PacienteType.hasMany(Documento);
 Documento.belongsTo(PacienteType);
 
-Cita.hasMany(Documento); 
+Cita.hasMany(Documento);
 Documento.belongsTo(Cita);
 
 module.exports = {
