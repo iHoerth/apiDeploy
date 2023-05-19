@@ -20,12 +20,12 @@ server.use(
 server.use(express.json());
 
 
-// server.use(
-//   cors({
-//     origin: '*',
-//   })
-// );
-// server.use(cors());
+server.use(
+  cors({
+    origin: '*',
+  })
+);
+server.use(cors());
 
 // server.use(morgan('dev'));
 //
