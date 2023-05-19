@@ -12,6 +12,11 @@ const port = PORT || 3001;
 const server = express();
 server.use(express.json());
 server.use(cors());
+server.use(
+  cors({
+    origin: '*',
+  })
+);
 server.use(morgan('dev'));
 //
 
@@ -24,12 +29,8 @@ conn.sync().then(async () => {
   });
 });
 
-server.set('port', port);
-server.use(
-  cors({
-    origin: '*',
-  })
-);
+// server.set('port', port);
+
 
 // server.post('/turno', (req, res) => {
 //   // res.status(200).send('ok');
