@@ -5,6 +5,7 @@ const {getHorariosById} = require("../horarios/getHorariosById")
 const getDoctorCalendar = async (idDoctor)=>{
     const generarTurnos = async (idDoctor) => {
         let agenda = await getHorariosById(idDoctor);
+        console.log(agenda);
     
         const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         let today = new Date()

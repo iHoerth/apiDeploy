@@ -20,7 +20,6 @@ const router = Router();
 
 router.post("/fake", async (req, res) => {
   try {
-    
     await createFakeData();
     return res.status(200).send("data created");
   } catch (error) {

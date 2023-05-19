@@ -26,8 +26,8 @@ server.use(
 );
 server.use(cors());
 
-// server.use(morgan('dev'));
-//
+server.use(morgan('dev'));
+
 
 server.use('/', routes);
 
