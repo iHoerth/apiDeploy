@@ -1,9 +1,9 @@
-const { getPatient } = require('../controllers/patients/getPatient');
-const { getAllPatients } = require('../controllers/patients/getAllPatients');
-const { getPatientById } = require('../controllers/patients/getPatientById');
-const { createPatient } = require('../controllers/patients/createPatient');
-const { modifyPatient } = require('../controllers/patients/modifyPatient');
-const bcrypt = require('bcryptjs');
+const { getPatient } = require("../controllers/patients/getPatient");
+const { getAllPatients } = require("../controllers/patients/getAllPatients");
+const { getPatientById } = require("../controllers/patients/getPatientById");
+const { createPatient } = require("../controllers/patients/createPatient");
+const { modifyPatient } = require("../controllers/patients/modifyPatient");
+const bcrypt = require("bcrypt");
 
 const getPatients = async (req, res) => {
   const { email } = req.query;
@@ -26,11 +26,11 @@ const getPatientsById = async (req, res) => {
 };
 
 const postPatient = async (req, res) => {
-  const { dni, email, password, telefono, nombre, apellido, idObraSocial } = req.body;
+  const { dni, email, password, telefono, nombre, apellido, idObraSocial } =
+    req.body;
   try {
     // Generar un hash de la constraseña utilizando bcrypt
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const result = await createPatient(
       dni,

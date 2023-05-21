@@ -28,8 +28,8 @@ const postHorarios = async (req, res) => {
 
 const postHorariosBulk = async (req, res) => {
     const {agenda, id} = req.body;
-    // console.log(agenda);
-    // console.log(id)
+    console.log(agenda);
+    console.log(id)
     try {
         const result = await createHorariosBulk( agenda, id)
         res.status(200).json(result);

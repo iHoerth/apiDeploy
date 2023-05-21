@@ -220,7 +220,6 @@ const getDoctorCalendar = async (idDoctor) => {
     }
   }
   console.log('RETURN');
-  // console.log(timeTable);
   return timeTable;
 };
 module.exports = {

@@ -1,10 +1,12 @@
-const { getDoctor } = require('../controllers/doctors/getDoctor');
-const { getAllDoctors } = require('../controllers/doctors/getAllDoctors');
-const { getDoctorById } = require('../controllers/doctors/getDoctorById');
-const { createDoctor } = require('../controllers/doctors/createDoctor');
-const { modifyDoctor } = require('../controllers/doctors/modifyDoctor');
-const bcrypt = require('bcryptjs');
-const cloudinary = require('../utils/cloudinary');
+const { getDoctor } = require("../controllers/doctors/getDoctor");
+const { getAllDoctors } = require("../controllers/doctors/getAllDoctors");
+const { getDoctorById } = require("../controllers/doctors/getDoctorById");
+const { createDoctor } = require("../controllers/doctors/createDoctor");
+const { modifyDoctor } = require("../controllers/doctors/modifyDoctor");
+const { modifyProfileDoctor } = require("../controllers/doctors/modifyProfileDoctor");
+
+const bcrypt = require("bcrypt");
+const cloudinary = require("../utils/cloudinary")
 
 const getDoctors = async (req, res) => {
   const { email } = req.query;
@@ -46,14 +48,13 @@ const postDoctor = async (req, res) => {
 
   try {
     // Generar un hash de la contraseña utilizando bcrypt
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const cloudinaryResult = await cloudinary.uploader.upload(imagen, {
-      folder: 'Doctors',
+      folder: "Doctors",
       width: 300,
-      crop: 'scale',
-    });
+      crop: "scale"
+    })
     const imagenCloudinary = cloudinaryResult.secure_url;
     // agregar esto en el createDoctor como parametro en reemplazo de imagen
     // imagen: {
@@ -93,9 +94,31 @@ const putDoctor = async (req, res) => {
   }
 };
 
+const putDoctorEdit = async (req, res) => {
+  const doctorNewDetails = req.body;
+  console.log(doctorNewDetails);
+  try {
+    // console.log(doctorNewDetails.prevImagen);
+    // const deletePrevPhoto = await cloudinary.uploader.destroy(doctorNewDetails.prevImagen)
+    // console.log(deletePrevPhoto);
+    const cloudinaryResult = await cloudinary.uploader.upload(doctorNewDetails.imagen, {
+      folder: "Doctors",
+      width: 300,
+      crop: "scale"
+    })
+    const imagenCloudinary = cloudinaryResult.secure_url;
+    doctorNewDetails.imagen=imagenCloudinary;
+    const result = await modifyProfileDoctor(doctorNewDetails);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getDoctors,
   getDoctorsById,
   postDoctor,
   putDoctor,
+  putDoctorEdit
 };

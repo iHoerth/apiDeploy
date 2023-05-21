@@ -216,7 +216,7 @@ const createFakeData = async () => {
 
   const idEspecialidad = Math.ceil(Math.random() * 82);
   const newEspecialidad = await db.Especialidad.findByPk(idEspecialidad);
-  const idOSocial = Math.ceil(Math.random() * 108)
+  const idOSocial = Math.ceil(Math.random() * 108);
   const newOs = await db.ObraSocial.findByPk(idOSocial);
   const doctor = await db.DoctorType.create({
     dni: faker.datatype.number(),

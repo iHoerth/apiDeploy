@@ -1,9 +1,9 @@
 require("dotenv").config();
-const GOOGLE_CLIENT_ID = '508619813355-m14kuspv71hdsu4s1u8bsl421a999cf8.apps.googleusercontent.com'
-const SECRET_KEY = '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'
+const { GOOGLE_CLIENT_ID, SECRET_KEY } = process.env;
+
 const { DoctorType, PacienteType } = require("../db");
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 
@@ -23,7 +23,7 @@ function generateToken(user) {
 // Controlador para el login de doctor
 async function loginDoctor(req, res) {
   const { email, password, tokenId } = req.body; // email, password, token
-  // console.log("loginDoctor");
+  console.log("loginDoctor");
   try {
     if (tokenId) {
       // Verificar el token de Google
@@ -81,9 +81,10 @@ async function loginDoctor(req, res) {
 async function loginPatient(req, res) {
   //aca recibis como token
   const { email, password, tokenId } = req.body; // email, password, token
-  // console.log(tokenId, " - ", req.body);
+  console.log(tokenId, " - ", req.body);
   try {
     if (tokenId) {
+      console.log("acaaaaaa");
       // Verificar el token de Google
       const ticket = await client.verifyIdToken({
         idToken: tokenId,
@@ -114,6 +115,7 @@ async function loginPatient(req, res) {
       res.json({ token, isDoctor: false });
     } else {
       //mientras le podes poner asi para que responda si o si algo
+      console.log("aqqqqquuuiiiii");
 
       // Buscar al paciente por su email en la base de datos
       const patient = await PacienteType.findOne({

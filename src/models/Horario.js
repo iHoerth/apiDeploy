@@ -18,15 +18,15 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     horario_inicio:{
-      type: DataTypes.STRING,
+      type: DataTypes.TIME,
       allowNull: true,
     },
     horario_fin:{
-        type: DataTypes.STRING,
+        type: DataTypes.TIME,
         allowNull: true,
     },
     duracion_turno:{
-        type: DataTypes.STRING,
+        type: DataTypes.TIME,
         allowNull: true,
     },
   },{
