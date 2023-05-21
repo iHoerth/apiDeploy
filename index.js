@@ -8,6 +8,9 @@ const cors = require('cors');
 const routes = require('./src/routes/index');
 const { conn } = require('./src/db');
 
+const mercadopago = require('mercadopago');
+
+
 const hostFront = DEPLOY || 'http://localhost';
 const portFront = DEPLOYPORT || 3000;
 
@@ -96,7 +99,6 @@ server.post('/turno', (req, res) => {
 });
 
 // SDK de Mercado Pago
-const mercadopago = require('mercadopago');
 // Agrega credenciales
 mercadopago.configure({
   access_token: tokenMP,
