@@ -79,7 +79,7 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
-    console.log(turnos);
+    // console.log(turnos);
     return turnos;
   };
 
@@ -94,7 +94,6 @@ const getDoctorCalendar = async (idDoctor) => {
     // console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados);
     return turnosReservados;
   };
-
   console.log('78. FILTRAR TURNOS');
   const filtrarTurnos = (turno) => {
     if (turno.estado !== 'no atiende') {
@@ -102,7 +101,9 @@ const getDoctorCalendar = async (idDoctor) => {
       console.log('101 HORARIO ', horario);
       let dia = turno.fecha.split('-');
       console.log('103 DIA ', dia);
+      console.log('104 TURNO.FECHA ', turno.fecha) // ['2023-21-05']
 
+      console.log('106 DIA VS DIAHOY ',dia[0] < diaHoy[0])
       if (dia[0] < diaHoy[0]) return false;
       if (dia[0] === diaHoy[0] && dia[1] < diaHoy[1]) return false;
       if (dia[0] === diaHoy[0] && dia[1] === diaHoy[1] && dia[2] < diaHoy[2]) return false;
