@@ -21,7 +21,7 @@ const getDoctorCalendar = async (idDoctor) => {
     const agenda2 = agenda.slice(0, found);
     
     agenda = agenda1.concat(agenda2);
-    console.log(`23. ---- AGENDA ---- \n`,)
+    console.log(`23. ---- AGENDA ---- \n`,agenda)
     let turnos = [];
     for (let i = 0; i < agenda.length; i++) {
       // se muestran dos semanas de turnos
@@ -71,6 +71,7 @@ const getDoctorCalendar = async (idDoctor) => {
 
   const traerTurnos = async (idDoctor) => {
     const turnosReservados = await getAppointmentsByDoctor(idDoctor);
+    console.log('74. -----TURNOS RESERVADOS ----\n', turnosReservados)
     return turnosReservados;
   };
 
@@ -140,9 +141,10 @@ const getDoctorCalendar = async (idDoctor) => {
   if (mm2 < 10) mm2 = `0${mm2}`;
   manana = `${yy2}-${mm2}-${dd2}`;
 
-  console.log(today, manana);
+  console.log('144. TODAY, MANANA ---------- \n',today, manana);
 
   for (let i = 0; i < turnosFiltrados.length; ) {
+    console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n',turnosFiltrados.length)
     let turnosDia = [];
     let dia = turnosFiltrados[i].dia_semana;
     let fecha = turnosFiltrados[i].fecha;
