@@ -10,7 +10,7 @@ const getDoctorCalendar = async (idDoctor) => {
     // console.log('9. ------- AGENDA ------- \n',agenda);
 
     let today = new Date();
-    console.log('12. --- TODAY ---     ', today);
+    // console.log('12. --- TODAY ---     ', today);
 
     let dayOfWeek = daysOfWeek[today.getDay()];
     agenda = agenda.concat(agenda);
@@ -80,8 +80,8 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
-    // console.log('69 TURNOS');
-    // console.log(turnos);
+    console.log('69 TURNOS');
+    console.log(turnos);
     return turnos;
   };
 
@@ -159,7 +159,7 @@ const getDoctorCalendar = async (idDoctor) => {
   if (mm2 < 10) mm2 = `0${mm2}`;
   manana = `${yy2}-${mm2}-${dd2}`;
 
-  console.log('144. TODAY :', today, '\n MANANA: ', manana);
+  // console.log('144. TODAY :', today, '\n MANANA: ', manana);
 
   console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n', turnosFiltrados.length);
   for (let i = 0; i < turnosFiltrados.length; ) {
@@ -209,6 +209,7 @@ const getDoctorCalendar = async (idDoctor) => {
     }
   }
   console.log('RETURN');
+  // console.log(timeTable);
   return timeTable;
 };
 module.exports = {
