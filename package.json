@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon inedx.js"
+    "nachodev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
