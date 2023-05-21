@@ -52,10 +52,10 @@ const getDoctorCalendar = async (idDoctor) => {
         // console.log('47 NEW DATE HORA FIN ', horaFin);
 
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
-        console.log('50 DURACION TURNO TO DATE ', duracionTurno);
+        // console.log('50 DURACION TURNO TO DATE ', duracionTurno);
 
         let horaActual = horaInicio;
-        console.log('52 horaActual < horaFin ', horaActual < horaFin);
+        // console.log('52 horaActual < horaFin ', horaActual < horaFin);
 
         while (horaActual < horaFin) {
           let turno = {
@@ -101,9 +101,10 @@ const getDoctorCalendar = async (idDoctor) => {
       console.log('101 HORARIO ', horario);
       let dia = turno.fecha.split('-');
       console.log('103 DIA ', dia);
-      console.log('104 TURNO.FECHA ', turno.fecha); // ['2023-05-21']
+      console.log('104 TURNO.FECHA ', turno.fecha);
 
-      console.log('106 DIA VS DIAHOY ', dia[0] < diaHoy[0]);
+      // console.log('106 MES VS MESHOY ', dia[1] < diaHoy[1]);
+      console.log('106 DIA VS DIAHOY ', dia[2] < diaHoy[2]);
       if (dia[0] < diaHoy[0]) return false;
       if (dia[0] === diaHoy[0] && dia[1] < diaHoy[1]) return false;
       if (dia[0] === diaHoy[0] && dia[1] === diaHoy[1] && dia[2] < diaHoy[2]) return false;
@@ -133,16 +134,15 @@ const getDoctorCalendar = async (idDoctor) => {
   let horaHoy = new Date()
     .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     .replace(/:\d+ /, ':00 ');
-  let diaHoy = new Date().toLocaleDateString([], {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  console.log('141 DIAHOY PRE SPLIT ', diaHoy);
-  diaHoy = diaHoy.split('/').reverse();
-  console.log('143 DIA HOY ', diaHoy);
   horaHoy = horaHoy.split(':');
-  console.log('145 HORA HOY ', horaHoy);
+
+  let diaHoyDate = new Date();
+  let diaHoy = [
+    `${diaHoyDate.getFullYear()}`,
+    diaHoyDate.getMonth() < 10 ? `0${diaHoyDate.getMonth() + 1}` : `${diaHoyDate.getMonth() + 1}`,
+    `${diaHoyDate.getDate()}`,
+  ];
+  console.log('143 DIA HOY ', diaHoy);
 
   let turnosFiltrados = turnosMedico.filter(filtrarTurnos); //Filter turnos menores a la fecha actual
 
