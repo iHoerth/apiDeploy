@@ -66,8 +66,11 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
+    console.log('69 TURNOS')
+    console.log(turnos)
     return turnos;
   };
+
   console.log('71. TRAER TURNOS')
   const traerTurnos = async (idDoctor) => {
     const turnosReservados = await getAppointmentsByDoctor(idDoctor);
@@ -142,10 +145,10 @@ const getDoctorCalendar = async (idDoctor) => {
   if (mm2 < 10) mm2 = `0${mm2}`;
   manana = `${yy2}-${mm2}-${dd2}`;
 
-  console.log('144. TODAY, MANANA ---------- \n',today, manana);
+  console.log('144. TODAY :',today, '\n MANANA: ', manana);
 
+  console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n',turnosFiltrados.length)
   for (let i = 0; i < turnosFiltrados.length; ) {
-    console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n',turnosFiltrados.length)
     let turnosDia = [];
     let dia = turnosFiltrados[i].dia_semana;
     let fecha = turnosFiltrados[i].fecha;
@@ -191,6 +194,7 @@ const getDoctorCalendar = async (idDoctor) => {
       i++;
     }
   }
+  console.log('RETURN')
   return timeTable;
 };
 module.exports = {
