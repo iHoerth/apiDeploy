@@ -138,7 +138,9 @@ const getDoctorCalendar = async (idDoctor) => {
     day: '2-digit',
   });
   diaHoy = diaHoy.split('/').reverse();
+  console.log('141 DIA HOY ',diaHoy)
   horaHoy = horaHoy.split(':');
+  console.log('143 HORA HOY ',horaHoy)
 
   let turnosFiltrados = turnosMedico.filter(filtrarTurnos); //Filter turnos menores a la fecha actual
 
