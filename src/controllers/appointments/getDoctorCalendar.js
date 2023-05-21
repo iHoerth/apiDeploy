@@ -10,7 +10,7 @@ const getDoctorCalendar = async (idDoctor) => {
     // console.log('9. ------- AGENDA ------- \n',agenda);
 
     let today = new Date();
-    console.log('12. --- TODAY --- \n',today);
+    console.log('12. --- TODAY ---     ',today);
 
     let dayOfWeek = daysOfWeek[today.getDay()];
     agenda = agenda.concat(agenda);
@@ -32,18 +32,20 @@ const getDoctorCalendar = async (idDoctor) => {
       if (mm < 10) mm = `0${mm}`;
       let dd = today.getDate();
       let dayOfWeek = daysOfWeek[today.getDay()];
-      console.log(agenda[i].atiende)
+      console.log('atiende: ',agenda[i].atiende)
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
         console.log('HORA ACTUAL ',agenda[i].horario_inicio)
         let horaFin = agenda[i].horario_fin;
         let duracionTurno = agenda[i].duracion_turno;
         horaInicio = new Date(`2023-05-11T${horaInicio}`);
+        console.log('HORA INICIO ',horaInicio)
         horaFin = new Date(`2023-05-11T${horaFin}`);
+        console.log('HORA FIN ',horaFin)
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
         // console.log(agenda[i].horario_inicio)
         let horaActual = horaInicio;
-        console.log(horaActual < horaFin)
+        console.log('horaActual < horaFin ',horaActual < horaFin)
         // console.log(horaActual)
         // console.log(horaFin)
         while (horaActual < horaFin) {
