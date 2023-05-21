@@ -42,6 +42,9 @@ const getDoctorCalendar = async (idDoctor) => {
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
 
         let horaActual = horaInicio;
+        console.log(horaActual < horaFin)
+        console.log(horaActual)
+        console.log(horaFin)
         while (horaActual < horaFin) {
           let turno = {
             fecha: `${yy}-${mm}-${dd}`,
