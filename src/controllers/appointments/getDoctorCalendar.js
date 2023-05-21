@@ -35,16 +35,17 @@ const getDoctorCalendar = async (idDoctor) => {
       console.log(agenda[i].atiende)
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
+        console.log('HORA ACTUAL ',agenda[i].horario_inicio)
         let horaFin = agenda[i].horario_fin;
         let duracionTurno = agenda[i].duracion_turno;
         horaInicio = new Date(`2023-05-11T${horaInicio}`);
         horaFin = new Date(`2023-05-11T${horaFin}`);
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
-
+        // console.log(agenda[i].horario_inicio)
         let horaActual = horaInicio;
         console.log(horaActual < horaFin)
-        console.log(horaActual)
-        console.log(horaFin)
+        // console.log(horaActual)
+        // console.log(horaFin)
         while (horaActual < horaFin) {
           let turno = {
             fecha: `${yy}-${mm}-${dd}`,
