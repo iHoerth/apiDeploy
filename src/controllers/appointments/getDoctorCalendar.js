@@ -32,32 +32,31 @@ const getDoctorCalendar = async (idDoctor) => {
       if (mm < 10) mm = `0${mm}`;
       let dd = today.getDate();
       let dayOfWeek = daysOfWeek[today.getDay()];
-      console.log('atiende: ', agenda[i].atiende);
+      // console.log('atiende: ', agenda[i].atiende);
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
-        console.log('38 HORA INICIO ', horaInicio);
-        const horaInicioHH = horaInicio.split(':')[0]
-        if(horaInicioHH < 10) horaInicio = `0${horaInicio}`
+        // console.log('38 HORA INICIO ', horaInicio);
+        const horaInicioHH = horaInicio.split(':')[0];
+        if (horaInicioHH < 10) horaInicio = `0${horaInicio}`;
 
         let horaFin = agenda[i].horario_fin;
-        console.log('40 HORA FIN ', agenda[i].horario_fin);
+        // console.log('40 HORA FIN ', agenda[i].horario_fin);
 
         let duracionTurno = agenda[i].duracion_turno;
-        console.log('42 DURACION TURNO ', agenda[i].duracion_turno);
+        // console.log('42 DURACION TURNO ', agenda[i].duracion_turno);
 
         horaInicio = new Date(`2023-05-11T${horaInicio}`);
-        console.log('45 NEW DATE HORA INICIO ', horaInicio);
+        // console.log('45 NEW DATE HORA INICIO ', horaInicio);
 
         horaFin = new Date(`2023-05-11T${horaFin}`);
-        console.log('47 NEW DATE HORA FIN ', horaFin);
+        // console.log('47 NEW DATE HORA FIN ', horaFin);
 
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
-        console.log('50 DURACION TURNO TO DATE ', duracionTurno)
+        console.log('50 DURACION TURNO TO DATE ', duracionTurno);
 
         let horaActual = horaInicio;
         console.log('52 horaActual < horaFin ', horaActual < horaFin);
-        // console.log(horaActual)
-        // console.log(horaFin)
+
         while (horaActual < horaFin) {
           let turno = {
             fecha: `${yy}-${mm}-${dd}`,
@@ -80,10 +79,14 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
-    console.log('69 TURNOS');
     console.log(turnos);
     return turnos;
   };
+
+  //! hasta aca parece todo bien
+  //! hasta aca parece todo bien
+  //! hasta aca parece todo bien
+  //! hasta aca parece todo bien
 
   console.log('71. TRAER TURNOS');
   const traerTurnos = async (idDoctor) => {
@@ -96,7 +99,9 @@ const getDoctorCalendar = async (idDoctor) => {
   const filtrarTurnos = (turno) => {
     if (turno.estado !== 'no atiende') {
       let horario = turno.hora.split(':');
+      console.log('101 HORARIO ', horario);
       let dia = turno.fecha.split('-');
+      console.log('103 DIA ', dia);
 
       if (dia[0] < diaHoy[0]) return false;
       if (dia[0] === diaHoy[0] && dia[1] < diaHoy[1]) return false;
@@ -122,6 +127,8 @@ const getDoctorCalendar = async (idDoctor) => {
 
   let turnosMedico = await generarTurnos(idDoctor);
   let turnosOcupados = await traerTurnos(idDoctor);
+  console.log('128 TURNOS OCUPADOS ', turnosOcupados);
+
   let horaHoy = new Date()
     .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     .replace(/:\d+ /, ':00 ');
