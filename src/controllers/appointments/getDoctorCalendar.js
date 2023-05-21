@@ -68,13 +68,14 @@ const getDoctorCalendar = async (idDoctor) => {
     }
     return turnos;
   };
-
+  console.log('71. TRAER TURNOS')
   const traerTurnos = async (idDoctor) => {
     const turnosReservados = await getAppointmentsByDoctor(idDoctor);
-    console.log('74. -----TURNOS RESERVADOS ----\n', turnosReservados)
+    console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados)
     return turnosReservados;
   };
 
+  console.log('78. FILTRAR TURNOS')
   const filtrarTurnos = (turno) => {
     if (turno.estado !== 'no atiende') {
       let horario = turno.hora.split(':');
@@ -124,7 +125,7 @@ const getDoctorCalendar = async (idDoctor) => {
     );
     if (found >= 0) turnosFiltrados[found].estado = 'ocupado';
   }
-
+  console.log('128 TIME TABLE')
   const timeTable = [];
 
   let today = new Date();
