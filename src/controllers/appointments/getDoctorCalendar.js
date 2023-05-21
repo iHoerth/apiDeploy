@@ -28,13 +28,11 @@ const getDoctorCalendar = async (idDoctor) => {
       let today = new Date();
       today.setDate(today.getDate() + i);
       let yy = today.getFullYear();
-      console.log(yy)
       let mm = today.getMonth() + 1;
       if (mm < 10) mm = `0${mm}`;
-      console.log(mm)
       let dd = today.getDate();
-      console.log(dd)
       let dayOfWeek = daysOfWeek[today.getDay()];
+      console.log('agenda[i] - - - - -',agenda[i])
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
         let horaFin = agenda[i].horario_fin;
