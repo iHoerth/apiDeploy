@@ -5,10 +5,11 @@ const { getHorariosById } = require('../horarios/getHorariosById');
 const getDoctorCalendar = async (idDoctor) => {
   const generarTurnos = async (idDoctor) => {
     let agenda = await getHorariosById(idDoctor);
-    console.log(agenda);
+    console.log('8. ------- AGENDA ------- \n',agenda);
 
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     let today = new Date();
+    console.log('12. --- TODAY --- \n',today)
     let dayOfWeek = daysOfWeek[today.getDay()];
 
     agenda = agenda.concat(agenda);
@@ -16,7 +17,7 @@ const getDoctorCalendar = async (idDoctor) => {
     const agenda1 = agenda.slice(found);
     const agenda2 = agenda.slice(0, found);
     agenda = agenda1.concat(agenda2);
-
+    console.log(`20. ---- AGENDA ---- \n`,)
     let turnos = [];
     for (let i = 0; i < agenda.length; i++) {
       // se muestran dos semanas de turnos

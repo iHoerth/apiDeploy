@@ -11,7 +11,7 @@ const getDoctorById = async (id) => {
     throw new Error('No se encontró el doctor con ese id');
   }
   doctorinfo.dataValues.calendar = calendar;
-  console.log('******* ***** *****\n', calendar);
+  // console.log('******* ***** *****\n', calendar);
   return doctorinfo;
 };
 

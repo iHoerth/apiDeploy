@@ -40,12 +40,12 @@ const createDoctor = async (
 
   if (Array.isArray(idEspecialidad) && idEspecialidad.length > 0) {
     for (let name of idEspecialidad) {
-      console.log("name: ", name);
+      // console.log("name: ", name);
       let idEpecial = name;
       const newEspecialidad = await Especialidad.findAll({
         where: { id: idEpecial },
       });
-      console.log("newEspecialidad: ", newEspecialidad);
+      // console.log("newEspecialidad: ", newEspecialidad);
       newDoctor.addEspecialidads(newEspecialidad);
     }
   } else {
@@ -68,7 +68,7 @@ const createDoctor = async (
       const newObraSocial = await ObraSocial.findAll({
         where: { id: idObra },
       });
-      console.log("newObraSocial: ", newObraSocial);
+      // console.log("newObraSocial: ", newObraSocial);
       newDoctor.addObraSocials(newObraSocial);
     }
   } else {
