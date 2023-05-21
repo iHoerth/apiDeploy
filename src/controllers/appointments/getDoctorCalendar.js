@@ -35,21 +35,21 @@ const getDoctorCalendar = async (idDoctor) => {
       console.log('atiende: ', agenda[i].atiende);
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
-        console.log('HORA INICIO ', agenda[i].horario_inicio);
+        console.log('38 HORA INICIO ', agenda[i].horario_inicio);
         let horaFin = agenda[i].horario_fin;
-        console.log('HORA FIN ', agenda[i].horario_inicio);
+        console.log('40 HORA FIN ', agenda[i].horario_inicio);
         let duracionTurno = agenda[i].duracion_turno;
-        console.log('DURACION TURNO ', agenda[i].duracion_turno);
+        console.log('42 DURACION TURNO ', agenda[i].duracion_turno);
 
         horaInicio = new Date(`2023-05-11T${horaInicio}`);
-        console.log('NEW DATE HORA INICIO ', horaInicio);
+        console.log('45 NEW DATE HORA INICIO ', horaInicio);
         horaFin = new Date(`2023-05-11T${horaFin}`);
-        console.log('NEW DATE HORA FIN ', horaFin);
+        console.log('47 NEW DATE HORA FIN ', horaFin);
 
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
-        console.log('DURACION TURNO TO DATE', duracionTurno)
+        console.log('50 DURACION TURNO TO DATE ', duracionTurno)
         let horaActual = horaInicio;
-        console.log('horaActual < horaFin ', horaActual < horaFin);
+        console.log('52 horaActual < horaFin ', horaActual < horaFin);
         // console.log(horaActual)
         // console.log(horaFin)
         while (horaActual < horaFin) {
@@ -74,15 +74,15 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
-    console.log('69 TURNOS');
-    console.log(turnos);
+    // console.log('69 TURNOS');
+    // console.log(turnos);
     return turnos;
   };
 
   console.log('71. TRAER TURNOS');
   const traerTurnos = async (idDoctor) => {
     const turnosReservados = await getAppointmentsByDoctor(idDoctor);
-    console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados);
+    // console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados);
     return turnosReservados;
   };
 
