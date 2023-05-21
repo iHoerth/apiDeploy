@@ -101,9 +101,9 @@ const getDoctorCalendar = async (idDoctor) => {
       console.log('101 HORARIO ', horario);
       let dia = turno.fecha.split('-');
       console.log('103 DIA ', dia);
-      console.log('104 TURNO.FECHA ', turno.fecha) // ['2023-21-05']
+      console.log('104 TURNO.FECHA ', turno.fecha); // ['2023-05-21']
 
-      console.log('106 DIA VS DIAHOY ',dia[0] < diaHoy[0])
+      console.log('106 DIA VS DIAHOY ', dia[0] < diaHoy[0]);
       if (dia[0] < diaHoy[0]) return false;
       if (dia[0] === diaHoy[0] && dia[1] < diaHoy[1]) return false;
       if (dia[0] === diaHoy[0] && dia[1] === diaHoy[1] && dia[2] < diaHoy[2]) return false;
@@ -128,7 +128,7 @@ const getDoctorCalendar = async (idDoctor) => {
 
   let turnosMedico = await generarTurnos(idDoctor);
   let turnosOcupados = await traerTurnos(idDoctor);
-  console.log('128 TURNOS OCUPADOS ', turnosOcupados);
+  // console.log('128 TURNOS OCUPADOS ', turnosOcupados);
 
   let horaHoy = new Date()
     .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
@@ -138,10 +138,11 @@ const getDoctorCalendar = async (idDoctor) => {
     month: '2-digit',
     day: '2-digit',
   });
+  console.log('141 DIAHOY PRE SPLIT ', diaHoy);
   diaHoy = diaHoy.split('/').reverse();
-  console.log('141 DIA HOY ',diaHoy)
+  console.log('143 DIA HOY ', diaHoy);
   horaHoy = horaHoy.split(':');
-  console.log('143 HORA HOY ',horaHoy)
+  console.log('145 HORA HOY ', horaHoy);
 
   let turnosFiltrados = turnosMedico.filter(filtrarTurnos); //Filter turnos menores a la fecha actual
 
