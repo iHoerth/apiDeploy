@@ -10,7 +10,7 @@ const getDoctorCalendar = async (idDoctor) => {
     // console.log('9. ------- AGENDA ------- \n',agenda);
 
     let today = new Date();
-    console.log('12. --- TODAY ---     ',today);
+    console.log('12. --- TODAY ---     ', today);
 
     let dayOfWeek = daysOfWeek[today.getDay()];
     agenda = agenda.concat(agenda);
@@ -19,7 +19,7 @@ const getDoctorCalendar = async (idDoctor) => {
 
     const agenda1 = agenda.slice(found);
     const agenda2 = agenda.slice(0, found);
-    
+
     agenda = agenda1.concat(agenda2);
     // console.log(`23. ---- AGENDA ---- \n`,agenda)
     let turnos = [];
@@ -32,20 +32,24 @@ const getDoctorCalendar = async (idDoctor) => {
       if (mm < 10) mm = `0${mm}`;
       let dd = today.getDate();
       let dayOfWeek = daysOfWeek[today.getDay()];
-      console.log('atiende: ',agenda[i].atiende)
+      console.log('atiende: ', agenda[i].atiende);
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
-        console.log('HORA ACTUAL ',agenda[i].horario_inicio)
+        console.log('HORA INICIO ', agenda[i].horario_inicio);
         let horaFin = agenda[i].horario_fin;
+        console.log('HORA FIN ', agenda[i].horario_inicio);
         let duracionTurno = agenda[i].duracion_turno;
+        console.log('DURACION TURNO ', agenda[i].duracion_turno);
+
         horaInicio = new Date(`2023-05-11T${horaInicio}`);
-        console.log('HORA INICIO ',horaInicio)
+        console.log('NEW DATE HORA INICIO ', horaInicio);
         horaFin = new Date(`2023-05-11T${horaFin}`);
-        console.log('HORA FIN ',horaFin)
+        console.log('NEW DATE HORA FIN ', horaFin);
+
         duracionTurno = new Date(`1970-01-01T${duracionTurno}Z`);
-        // console.log(agenda[i].horario_inicio)
+        console.log('DURACION TURNO TO DATE', duracionTurno)
         let horaActual = horaInicio;
-        console.log('horaActual < horaFin ',horaActual < horaFin)
+        console.log('horaActual < horaFin ', horaActual < horaFin);
         // console.log(horaActual)
         // console.log(horaFin)
         while (horaActual < horaFin) {
@@ -70,19 +74,19 @@ const getDoctorCalendar = async (idDoctor) => {
         turnos.push(turno);
       }
     }
-    console.log('69 TURNOS')
-    console.log(turnos)
+    console.log('69 TURNOS');
+    console.log(turnos);
     return turnos;
   };
 
-  console.log('71. TRAER TURNOS')
+  console.log('71. TRAER TURNOS');
   const traerTurnos = async (idDoctor) => {
     const turnosReservados = await getAppointmentsByDoctor(idDoctor);
-    console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados)
+    console.log('74. -- TURNOS RESERVADOS --\n', turnosReservados);
     return turnosReservados;
   };
 
-  console.log('78. FILTRAR TURNOS')
+  console.log('78. FILTRAR TURNOS');
   const filtrarTurnos = (turno) => {
     if (turno.estado !== 'no atiende') {
       let horario = turno.hora.split(':');
@@ -132,7 +136,7 @@ const getDoctorCalendar = async (idDoctor) => {
     );
     if (found >= 0) turnosFiltrados[found].estado = 'ocupado';
   }
-  console.log('128 TIME TABLE')
+  console.log('128 TIME TABLE');
   const timeTable = [];
 
   let today = new Date();
@@ -149,9 +153,9 @@ const getDoctorCalendar = async (idDoctor) => {
   if (mm2 < 10) mm2 = `0${mm2}`;
   manana = `${yy2}-${mm2}-${dd2}`;
 
-  console.log('144. TODAY :',today, '\n MANANA: ', manana);
+  console.log('144. TODAY :', today, '\n MANANA: ', manana);
 
-  console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n',turnosFiltrados.length)
+  console.log('147. ---- TURNOS FILTRADOS LENGTH ----\n', turnosFiltrados.length);
   for (let i = 0; i < turnosFiltrados.length; ) {
     let turnosDia = [];
     let dia = turnosFiltrados[i].dia_semana;
@@ -198,7 +202,7 @@ const getDoctorCalendar = async (idDoctor) => {
       i++;
     }
   }
-  console.log('RETURN')
+  console.log('RETURN');
   return timeTable;
 };
 module.exports = {
