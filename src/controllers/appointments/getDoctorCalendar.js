@@ -2,31 +2,38 @@ const { Cita } = require('../../db');
 const { getAppointmentsByDoctor } = require('./getAppointmentsByDoctor');
 const { getHorariosById } = require('../horarios/getHorariosById');
 
+const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
 const getDoctorCalendar = async (idDoctor) => {
   const generarTurnos = async (idDoctor) => {
     let agenda = await getHorariosById(idDoctor);
-    console.log('8. ------- AGENDA ------- \n',agenda);
+    console.log('9. ------- AGENDA ------- \n',agenda);
 
-    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     let today = new Date();
-    console.log('12. --- TODAY --- \n',today)
-    let dayOfWeek = daysOfWeek[today.getDay()];
+    console.log('12. --- TODAY --- \n',today);
 
+    let dayOfWeek = daysOfWeek[today.getDay()];
     agenda = agenda.concat(agenda);
+
     const found = agenda.findIndex((dia) => dia.dia_semana === dayOfWeek);
+
     const agenda1 = agenda.slice(found);
     const agenda2 = agenda.slice(0, found);
+    
     agenda = agenda1.concat(agenda2);
-    console.log(`20. ---- AGENDA ---- \n`,)
+    console.log(`23. ---- AGENDA ---- \n`,)
     let turnos = [];
     for (let i = 0; i < agenda.length; i++) {
       // se muestran dos semanas de turnos
       let today = new Date();
       today.setDate(today.getDate() + i);
       let yy = today.getFullYear();
+      console.log(yy)
       let mm = today.getMonth() + 1;
       if (mm < 10) mm = `0${mm}`;
+      console.log(mm)
       let dd = today.getDate();
+      console.log(dd)
       let dayOfWeek = daysOfWeek[today.getDay()];
       if (agenda[i].atiende === 'si') {
         let horaInicio = agenda[i].horario_inicio;
