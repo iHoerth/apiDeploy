@@ -14,10 +14,11 @@ const doctorsRouter = Router();
 // GET
 doctorsRouter.get("/", getDoctors); // tener en cuenta el query by ?name=....
 doctorsRouter.get("/:id", getDoctorsById);
+doctorsRouter.get("/loginDoctor", loginDoctor);
 
 // POST
 doctorsRouter.post("/", postDoctor);
-doctorsRouter.post("/loginDoctor", loginDoctor);
+
 //PUT
 doctorsRouter.put("/", putDoctor);
 doctorsRouter.put("/edit", putDoctorEdit);

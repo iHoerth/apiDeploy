@@ -15,6 +15,7 @@ const port = PORT || 3001;
 
 const server = express();
 server.use(express.json());
+
 server.use(
   cors({
     origin: '*',
