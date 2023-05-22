@@ -10,7 +10,6 @@ const { conn } = require('./src/db');
 
 const mercadopago = require('mercadopago');
 
-
 const hostFront = DEPLOY || 'http://localhost';
 const portFront = DEPLOYPORT || 3000;
 
@@ -20,7 +19,7 @@ const server = express();
 server.use(express.json());
 server.use(
   cors({
-    origin: '*',
+    origin: ['*', 'https://apideploy-production.up.railway.app'],
   })
 );
 
